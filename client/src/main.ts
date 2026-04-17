@@ -88,12 +88,16 @@ function populateSelects() {
 
     // Створюємо контейнер для осі Y
     const label = document.createElement('label');
-    label.className = 'flex items-center gap-2 mb-2 cursor-pointer text-sm text-slate-700 hover:bg-slate-50 p-1 rounded';
+    label.style.display = 'flex';
+    label.style.alignItems = 'center';
+    label.style.gap = '8px'; 
+    label.style.marginBottom = '5px';
+    label.style.cursor = 'pointer';
 
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.value = header;
-    checkbox.className = 'y-axis-checkbox w-4 h-4 text-blue-600 rounded';
+    checkbox.className = 'y-axis-checkbox';
 
     // ВІДНОВЛЮЄМО ГАЛОЧКУ, якщо вона була раніше
     if (previousSelections.has(header)) {
@@ -108,7 +112,7 @@ function populateSelects() {
 
     const colorPicker = document.createElement('input');
     colorPicker.type = 'color';
-    colorPicker.className = 'y-axis-color w-6 h-6 p-0 border-0 cursor-pointer rounded';
+    colorPicker.className = 'y-axis-color';
     
     // ВІДНОВЛЮЄМО КОЛІР, якщо він був обраний раніше, інакше ставимо дефолтний
     colorPicker.value = previousColors[header] || defaultColors[index % defaultColors.length]; 
@@ -154,15 +158,22 @@ function renderTablePreview() {
 
   // НОВЕ: Спочатку додаємо колонку для хрестиків (вона буде першою зліва)
   const thAction = document.createElement('th');
-  thAction.className = 'w-8 bg-slate-100 sticky left-0 z-20 border border-slate-200 p-2 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.1)]';
+  thAction.style.width = '30px';
+  thAction.style.backgroundColor = '#e2e8f0';
+  // Робимо її "липкою" до лівого краю
+  thAction.style.position = 'sticky';
+  thAction.style.left = '0';
+  thAction.style.zIndex = '12'; // Щоб вона перекривала інші колонки при скролі
   trHead.appendChild(thAction);
   
   headers.forEach((header, colIndex) => {
     const th = document.createElement('th');
-    th.className = 'bg-slate-100 p-2 border border-slate-200 sticky top-0 z-10 text-slate-700 font-semibold';
+    th.style.backgroundColor = '#e2e8f0';
     
     const thContainer = document.createElement('div');
-    thContainer.className = 'flex justify-between items-center gap-3';
+    thContainer.style.display = 'flex';
+    thContainer.style.justifyContent = 'space-between';
+    thContainer.style.alignItems = 'center';
 
     const titleSpan = document.createElement('span');
     titleSpan.textContent = header;
@@ -229,7 +240,11 @@ function renderTablePreview() {
     
     // НОВЕ: Кнопка видалення рядка (тепер створюється найпершою)
     const tdAction = document.createElement('td');
-    tdAction.className = 'text-center bg-white sticky left-0 z-10 border border-slate-200 p-2 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.1)]';
+    tdAction.style.textAlign = 'center';
+    tdAction.style.backgroundColor = '#ffffff'; // Білий фон, щоб інші колонки не просвічувались під нею
+    tdAction.style.position = 'sticky';
+    tdAction.style.left = '0';
+    tdAction.style.zIndex = '2'; // Щоб залишалась поверх інших даних
     
     const deleteRowBtn = document.createElement('span');
     deleteRowBtn.innerHTML = '&#10006;';
@@ -249,7 +264,6 @@ function renderTablePreview() {
     // Клітинки з даними
     headers.forEach(header => {
       const td = document.createElement('td');
-      td.className = 'p-2 border border-slate-200 outline-none focus:bg-blue-50 transition-colors';
       td.textContent = row[header] !== undefined ? row[header] : '';
       td.contentEditable = 'true';
       td.style.cursor = 'text';
