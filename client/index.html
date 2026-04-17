@@ -6,91 +6,87 @@
     <title>CSV Visualizer - Диплом</title>
     <link rel="stylesheet" href="./style.css">
   </head>
-  <body>
-    <div id="app">
-      <header>
-        <h1>Dynamic Data Visualizer</h1>
-      </header>
+<body class="bg-slate-50 text-slate-800 p-4 md:p-8">
+    <div id="app" class="max-w-7xl mx-auto flex flex-col gap-6">
+      <h1 class="text-3xl font-semibold text-slate-900">Dynamic Data Visualizer</h1>
 
-      <div class="top-container">
-        <div class="controls-panel">
-          <div class="upload-box">
-            <label for="csvInput">Оберіть CSV файл:</label>
-            <input type="file" id="csvInput" accept=".csv" />
-            <button id="btnCreateNew" style="margin-top: 10px; background-color: #6c757d;">Створити таблицю з нуля</button>
+      <div class="flex flex-col lg:grid lg:grid-cols-2 gap-6 items-stretch">
+        
+        <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-100 flex flex-col min-w-0">
+          
+          <div class="flex flex-col sm:flex-row gap-3 mb-4 items-start sm:items-center">
+            <div class="flex-1 w-full">
+              <label class="block text-sm font-medium text-slate-600 mb-1">Оберіть CSV файл:</label>
+              <input type="file" id="csvFileInput" accept=".csv" class="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer" />
+            </div>
+            <button id="btnCreateEmpty" class="w-full sm:w-auto mt-5 sm:mt-0 bg-slate-600 hover:bg-slate-700 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm whitespace-nowrap">Створити таблицю з нуля</button>
           </div>
-<!-- <div class="history-box" style="margin-top: 20px; border-top: 1px solid #ccc; padding-top: 10px;">
-    <h4>Історія завантажень:</h4>
-    <ul id="historyList" style="list-style: none; padding: 0; font-size: 12px;"></ul>
-</div> -->
-          <div class="settings">
-<label>Тип графіка:</label>
-            <select id="chartType">
-              <option value="bar">Стовпчикова (Bar)</option>
-              <option value="stackedBar">Стовпчикова з накопиченням (Stacked Bar)</option> 
-              <option value="line">Лінійна (Line)</option>
-              <option value="area">Графік з областями (Area)</option>
-              <option value="pie">Кругова (Pie)</option>
-              <option value="doughnut">Кільцева (Doughnut)</option>
-              <option value="polarArea">Полярна (Polar Area)</option>
-              <option value="radar">Радарна (Radar)</option>
-              <option value="scatter">Точкова (Scatter)</option>
-              <option value="bubble">Бульбашкова (Bubble)</option>
+
+          <label class="block text-sm font-medium text-slate-600 mb-1">Тип графіка:</label>
+          <select id="chartType" class="w-full border border-slate-300 rounded-lg p-2.5 mb-4 focus:ring-2 focus:ring-blue-500 outline-none">
+            <option value="bar">Стовпчикова (Bar)</option>
+            <option value="stackedBar">Стовпчикова з накопиченням (Stacked Bar)</option>
+            <option value="line">Лінійна (Line)</option>
+            <option value="area">Графік з областями (Area)</option>
+            <option value="pie">Кругова (Pie)</option>
+            <option value="doughnut">Кільцева (Doughnut)</option>
+            <option value="polarArea">Полярна (Polar Area)</option>
+            <option value="radar">Радарна (Radar)</option>
+            <option value="scatter">Точкова (Scatter)</option>
+            <option value="bubble">Бульбашкова (Bubble)</option>
+          </select>
+
+          <label class="block text-sm font-medium text-slate-600 mb-1">Вісь X (Категорії):</label>
+          <select id="xAxisSelect" disabled class="w-full border border-slate-300 rounded-lg p-2.5 mb-4 focus:ring-2 focus:ring-blue-500 outline-none"></select>
+
+          <label class="block text-sm font-medium text-slate-600 mb-1">Вісь Y (можна обрати декілька):</label>
+          <div class="mb-2">
+            <label class="flex items-center gap-2 cursor-pointer font-medium text-blue-600">
+              <input type="checkbox" id="selectAllY" disabled class="w-4 h-4 rounded text-blue-600" /> Обрати всі
+            </label>
+          </div>
+          <div id="yAxisCheckboxes" class="border border-slate-300 rounded-lg p-3 max-h-48 overflow-y-auto bg-white mb-4">
+            <span class="text-xs text-slate-400">Спочатку завантажте файл</span>
+          </div>
+
+          <label class="block text-sm font-medium text-slate-600 mb-1">Заголовок графіка:</label>
+          <input type="text" id="chartTitle" placeholder="Мій графік" class="w-full border border-slate-300 rounded-lg p-2.5 mb-5 focus:ring-2 focus:ring-blue-500 outline-none" />
+
+          <button id="btnRender" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition-colors mb-3">Побудувати графік</button>
+
+          <div class="flex flex-col sm:flex-row gap-2 mt-auto">
+            <select id="exportFormat" class="border border-slate-300 rounded-lg p-2.5 flex-1 focus:ring-2 focus:ring-blue-500 outline-none">
+              <option value="png">PNG картинка</option>
+              <option value="jpeg">JPEG картинка</option>
+              <option value="pdf">PDF документ</option>
             </select>
-
-<label>Вісь X (Категорії):</label>
-            <select id="xAxisSelect" disabled><option>Спочатку завантажте файл</option></select>
-
-         <label>Вісь Y (можна обрати декілька):</label>
-            
-            <div style="margin-bottom: 5px; padding-left: 10px;">
-              <label style="cursor: pointer; font-weight: bold; color: #007bff; display: flex; align-items: center; gap: 8px;">
-                <input type="checkbox" id="selectAllY" disabled /> Обрати всі
-              </label>
-            </div>
-
-            <div id="yAxisCheckboxes" class="checkbox-group">
-              <span style="font-size: 12px; color: gray;">Спочатку завантажте файл</span>
-            </div>
-            <label>Заголовок графіка:</label>
-            <input type="text" id="chartTitleInput" placeholder="Мій графік" />
-            
-            <button id="btnRender">Побудувати графік</button>
-            <!-- <button id="btnExport" style="background-color: #28a745; margin-top: 5px;">Експорт PNG</button> -->
-             <div style="display: flex; gap: 5px; margin-top: 10px;">
-              <select id="exportFormat" style="flex: 1;">
-                <option value="png">PNG картинка</option>
-                <option value="jpeg">JPEG картинка</option>
-                <option value="pdf">PDF документ</option>
-              </select>
-              <button id="btnExport" style="background-color: #28a745; margin-top: 0; flex: 1;">Експортувати</button>
-            </div>
+            <button id="btnExport" class="bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2.5 px-4 rounded-lg transition-colors sm:flex-1">Експортувати</button>
           </div>
         </div>
 
-        <div class="preview-panel">
-          <h3>Попередній перегляд даних</h3>
-          <div class="table-wrapper">
-            <table id="dataTable">
-              <thead></thead>
-              <tbody></tbody>
+        <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-100 flex flex-col min-w-0 h-full">
+          <h2 class="text-lg font-semibold text-slate-800 mb-3">Попередній перегляд даних</h2>
+          <div class="flex-grow overflow-auto border border-slate-200 rounded-lg shadow-inner bg-slate-50 max-h-[400px]">
+            <table class="w-full text-sm text-left border-collapse min-w-max">
+              <thead id="tableHead"></thead>
+              <tbody id="tableBody" class="bg-white"></tbody>
             </table>
           </div>
-          <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
-            <button id="btnAddRow" style="display: none; background-color: #ffc107; color: black;">+ Додати рядок</button>
-            
-            <button id="btnAddColumn" style="display: none; background-color: #fd7e14; color: white;">+ Додати стовпчик</button>
-            
-            <button id="btnExportCSV" style="display: none; background-color: #17a2b8; color: white;">Зберегти дані</button>
+          
+          <div class="flex flex-wrap gap-2 mt-4">
+            <button id="btnAddRow" style="display: none;" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-medium py-2 px-3 rounded-lg text-sm transition-colors">+ Додати рядок</button>
+            <button id="btnAddColumn" style="display: none;" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-medium py-2 px-3 rounded-lg text-sm transition-colors">+ Додати стовпчик</button>
+            <button id="btnExportCSV" style="display: none;" class="bg-cyan-600 hover:bg-cyan-700 text-white font-medium py-2 px-3 rounded-lg text-sm transition-colors ml-auto">Зберегти як CSV</button>
           </div>
         </div>
+
       </div>
 
-      <div class="chart-container">
+      <div id="chartContainer" class="bg-white p-5 rounded-xl shadow-sm border border-slate-100 h-[500px]">
         <canvas id="myChart"></canvas>
       </div>
+      
     </div>
-
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
