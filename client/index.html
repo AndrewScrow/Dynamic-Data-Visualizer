@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSV Visualizer - Диплом</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <h1>Dynamic Data Visualizer</h1>
+      </header>
+
+      <div class="top-container">
+        <div class="controls-panel">
+          <div class="upload-box">
+            <label for="csvInput">Оберіть CSV файл:</label>
+            <input type="file" id="csvInput" accept=".csv" />
+            <button id="btnCreateNew" style="margin-top: 10px; background-color: #6c757d;">Створити таблицю з нуля</button>
+          </div>
+<!-- <div class="history-box" style="margin-top: 20px; border-top: 1px solid #ccc; padding-top: 10px;">
+    <h4>Історія завантажень:</h4>
+    <ul id="historyList" style="list-style: none; padding: 0; font-size: 12px;"></ul>
+</div> -->
+          <div class="settings">
+<label>Тип графіка:</label>
+            <select id="chartType">
+              <option value="bar">Стовпчикова (Bar)</option>
+              <option value="stackedBar">Стовпчикова з накопиченням (Stacked Bar)</option> 
+              <option value="line">Лінійна (Line)</option>
+              <option value="area">Графік з областями (Area)</option>
+              <option value="pie">Кругова (Pie)</option>
+              <option value="doughnut">Кільцева (Doughnut)</option>
+              <option value="polarArea">Полярна (Polar Area)</option>
+              <option value="radar">Радарна (Radar)</option>
+              <option value="scatter">Точкова (Scatter)</option>
+              <option value="bubble">Бульбашкова (Bubble)</option>
+            </select>
+
+<label>Вісь X (Категорії):</label>
+            <select id="xAxisSelect" disabled><option>Спочатку завантажте файл</option></select>
+
+         <label>Вісь Y (можна обрати декілька):</label>
+            
+            <div style="margin-bottom: 5px; padding-left: 10px;">
+              <label style="cursor: pointer; font-weight: bold; color: #007bff; display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" id="selectAllY" disabled /> Обрати всі
+              </label>
+            </div>
+
+            <div id="yAxisCheckboxes" class="checkbox-group">
+              <span style="font-size: 12px; color: gray;">Спочатку завантажте файл</span>
+            </div>
+            <label>Заголовок графіка:</label>
+            <input type="text" id="chartTitleInput" placeholder="Мій графік" />
+            
+            <button id="btnRender">Побудувати графік</button>
+            <!-- <button id="btnExport" style="background-color: #28a745; margin-top: 5px;">Експорт PNG</button> -->
+             <div style="display: flex; gap: 5px; margin-top: 10px;">
+              <select id="exportFormat" style="flex: 1;">
+                <option value="png">PNG картинка</option>
+                <option value="jpeg">JPEG картинка</option>
+                <option value="pdf">PDF документ</option>
+              </select>
+              <button id="btnExport" style="background-color: #28a745; margin-top: 0; flex: 1;">Експортувати</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-panel">
+          <h3>Попередній перегляд даних</h3>
+          <div class="table-wrapper">
+            <table id="dataTable">
+              <thead></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
+            <button id="btnAddRow" style="display: none; background-color: #ffc107; color: black;">+ Додати рядок</button>
+            
+            <button id="btnAddColumn" style="display: none; background-color: #fd7e14; color: white;">+ Додати стовпчик</button>
+            
+            <button id="btnExportCSV" style="display: none; background-color: #17a2b8; color: white;">Зберегти дані</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <canvas id="myChart"></canvas>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
