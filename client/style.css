@@ -202,7 +202,9 @@ th {
 .custom-file-btn:hover {
   background-color: #e2e6ea;
 }
-
+.logo-mobile {
+  display: none;
+}
 /* ========================================= */
 /* АДАПТИВНІСТЬ ДЛЯ ТЕЛЕФОНІВ ТА ПЛАНШЕТІВ   */
 /* ========================================= */
@@ -235,27 +237,19 @@ th {
   input, select, button {
     font-size: 16px !important; 
   }
-  @media (max-width: 768px) {
-  /* Якщо логотип — це SVG картинка */
-  header svg {
-    max-width: 100%;  /* Картинка ніколи не буде ширшою за екран */
-    height: auto;     /* Висота підлаштується автоматично, щоб не спотворити пропорції */
-    display: block;
-    margin: 0 auto;   /* Вирівнюємо логотип по центру */
-  }
-
-  /* На випадок, якщо там залишився текст
-  header h1 {
-    font-size: 1.8rem; 
-    word-wrap: break-word; 
-    text-align: center; 
-    margin-bottom: 15px;
-  } */
+@media (max-width: 768px) {
   
-  #app, .top-container {
-    width: 100%;
-    box-sizing: border-box;
-    overflow-x: hidden;
+  /* 1. Ховаємо велике десктопне лого */
+  .logo-desktop {
+    display: none !important;
+  }
+  
+  /* 2. Показуємо маленьке мобільне лого */
+  .logo-mobile {
+    display: block !important; 
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto; /* Вирівнюємо по центру */
   }
 }
 }
