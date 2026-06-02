@@ -3,21 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CSV Visualizer - Диплом</title>
+    <title>Dynamic Data Visualizer</title>
+    <link rel="icon" type="image/x-icon" href="src/IcoDyplom.ico" />
     <link rel="stylesheet" href="./style.css">
   </head>
   <body>
     <div id="app">
       <header>
-        <h1>Dynamic Data Visualizer</h1>
+        <img src ="src/LogoDyplom.svg"> 
+        </img>
       </header>
 
       <div class="top-container">
         <div class="controls-panel">
           <div class="upload-box">
-            <label for="csvInput">Оберіть CSV файл:</label>
+            <label style="white-space: nowrap;">Оберіть CSV файл:</label>
+            <label for="csvInput" class="custom-file-btn">Вибрати файл</label>
             <input type="file" id="csvInput" accept=".csv" />
-            <button id="btnCreateNew" style="margin-top: 10px; background-color: #6c757d;">Створити таблицю з нуля</button>
+            <span id="fileNameSpan" style="font-size: 13px; color: #6c757d; white-space: nowrap;">Файл не вибрано</span>
+            <button id="btnCreateNew" style="background-color: #6c757d; color: white; border: none;">Створити таблицю з нуля</button>
           </div>
 <!-- <div class="history-box" style="margin-top: 20px; border-top: 1px solid #ccc; padding-top: 10px;">
     <h4>Історія завантажень:</h4>

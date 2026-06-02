@@ -163,6 +163,45 @@ th {
 #yAxisCheckboxes {
   max-height: 140px;
 }
+/* Робимо контейнер гнучким, щоб все стояло рівно */
+.upload-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Ховаємо потворний стандартний інпут */
+#csvInput {
+  display: none;
+}
+
+/* Задаємо ОДНАКОВІ стилі для обох кнопок */
+.custom-file-btn, #btnCreateNew {
+  height: 42px; /* Фіксована однакова висота */
+  padding: 0 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  margin: 0 !important; /* Прибираємо старі відступи */
+  transition: all 0.2s ease;
+}
+
+/* Колір кнопки "Вибрати файл" */
+.custom-file-btn {
+  background-color: #f8f9fa;
+  color: #333;
+  border: 1px solid #ccc;
+}
+
+.custom-file-btn:hover {
+  background-color: #e2e6ea;
+}
 
 /* ========================================= */
 /* АДАПТИВНІСТЬ ДЛЯ ТЕЛЕФОНІВ ТА ПЛАНШЕТІВ   */
